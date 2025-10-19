@@ -82,6 +82,27 @@
             justify-content: flex-start; 
         }
 
+    /* Tambahan: Gaya untuk Container Ikon dan Konten OPD */
+        .opd-info-group {
+            display: flex;
+            align-items: center;
+            flex: 1; /* Agar mengambil ruang yang tersedia */
+        }
+        
+        /* Tambahan: Gaya untuk Toggle Button OPD */
+        .opd-toggle-btn {
+            font-size: 30px; /* Sedikit lebih besar dari toggle kegiatan */
+            color: #0b51a0;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            padding: 5px;
+        }
+
+        /* Tambahan: Rotasi ikon saat card OPD terbuka */
+        .card.expanded .opd-toggle-btn {
+            transform: rotate(180deg);
+        }
+        
         .icon {
             font-size: 48px;
             margin-right: 20px;
@@ -459,7 +480,7 @@
             `;
         }
 
-        // Fungsi untuk membuat HTML Card OPD (Tanpa Ikon Toggle)
+// Fungsi untuk membuat HTML Card OPD (DITAMBAH Tombol Toggle)
         function createOPDCard(opd) {
             const totalKegiatan = opd.kegiatan.length;
             const card = document.createElement('div');
@@ -468,15 +489,18 @@
 
             card.innerHTML = `
                 <div class="card-header">
-                    <div class="icon">${opd.icon}</div>
-                    <div class="card-content">
-                        <div class="card-title">${opd.opd}</div>
-                        <div class="card-info"><strong>Total Anggaran : </strong> ${formatRupiah(opd.pagu_opd)}</div>
-                        <div class="card-info"><strong>Jumlah Kegiatan : </strong> ${totalKegiatan}</div>
+                    <div class="opd-info-group">
+                        <div class="icon">${opd.icon}</div>
+                        <div class="card-content">
+                            <div class="card-title">${opd.opd}</div>
+                            <div class="card-info"><strong>Total Anggaran : </strong> ${formatRupiah(opd.pagu_opd)}</div>
+                            <div class="card-info"><strong>Jumlah Kegiatan : </strong> ${totalKegiatan}</div>
+                        </div>
                     </div>
-                    </div>
+                    <span class="material-icons opd-toggle-btn">expand_more</span>
+                </div>
                 <div class="kegiatan-container">
-                    </div>
+                </div>
             `;
             
             const kegiatanContainer = card.querySelector('.kegiatan-container');
@@ -558,6 +582,7 @@
     </script>
 </body>
 </html>
+
 
 
 
