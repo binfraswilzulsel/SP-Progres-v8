@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Progres Strong Point</title>
-      <!-- Meta Tags untuk Open Graph -->
+    <title>Strong Point Progres</title>
+  <!-- Meta Tags untuk Open Graph -->
   <meta property="og:title" content="Strong Point 2025">
   <meta property="og:description" content="Lihat kegiatan Strong Point Mitra Bidang Infraswil 2025.">
   <meta property="og:image" content="https://binfraswilzulsel.my.id/sp.jpg" />
   <meta property="og:url" content="binfraswilzulsel.my.id/" />
   <meta property="og:type" content="website" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         /* Gaya Dasar */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #0740aa;
+            background-color: #0b51a0;
         }
 
         header {
             position: sticky;
             top: 0;
-            background-color: #0740aa;
+            background-color: #0b51a0;
             color: white;
             padding: 15px 20px;
             font-weight: bold;
@@ -34,18 +34,16 @@
         }
 
         .header-logo {
-        width:125px;
-        height: auto;
-        margin-right: 10px;
-        margin-left: 2px;
-        object-fit: contain;
-        border-radius: 20px;
-}
+            width:130px;
+            height: auto;
+            margin-right: 10px;
+            margin-left: 2px;
+            object-fit: contain;
+            border-radius: 20px;
+        }
         .header-title {
-        margin: 0;
-        flex-grow: 1;    
-
-            
+            margin: 0;
+            line-height: 1; 
         }
         .container {
             padding: 20px;
@@ -63,7 +61,6 @@
             display: flex;
             align-items: center;
             box-shadow: 0 7px 20px rgb(1, 196, 255);
-            cursor: pointer;
             transition: box-shadow 0.3s ease;
             flex-direction: column;
             align-items: stretch;
@@ -78,11 +75,13 @@
             align-items: center;
             width: 100%;
             padding: 5px 0;
-            /* Flexbox di sini agar icon dan content terpisah jika ada */
-            justify-content: flex-start; 
+            /* Tambahkan cursor pointer pada header untuk toggle */
+            cursor: pointer; 
+            /* Tambahkan justify-content space-between untuk memisahkan ikon OPD dan toggle */
+            justify-content: space-between; 
         }
-
-    /* Tambahan: Gaya untuk Container Ikon dan Konten OPD */
+        
+        /* Tambahan: Gaya untuk Container Ikon dan Konten OPD */
         .opd-info-group {
             display: flex;
             align-items: center;
@@ -103,7 +102,7 @@
             transform: rotate(360deg);
             color: #0b51a0; 
         }
-        
+
         .icon {
             font-size: 48px;
             margin-right: 20px;
@@ -156,27 +155,28 @@
             background-color: #eef1f5;
         }
         
-        /* Container untuk Title dan Icon di dalam Kegiatan Card (PENTING: Flexbox untuk kerapian) */
+        /* Container untuk Title dan Icon di dalam Kegiatan Card */
         .kegiatan-card-head {
             display: flex; 
-            justify-content: space-between; /* Pisahkan elemen kiri dan toggle kanan */
+            justify-content: space-between; 
             align-items: center;
             width: 100%;
         }
 
         /* Tombol Toggle (Ikon Panah) - Hanya di kegiatan */
-        .toggle-btn {
+        .kegiatan-card .toggle-btn {
             font-size: 24px;
             cursor: pointer;
             margin-left: 10px;
-            transition: color 0.3s ease; 
+            transition: transform 0.3s ease; 
             flex-shrink: 0; 
             color: #555;
         }
 
-        /* Perubahan warna ikon saat kegiatan terbuka */
+       /* Rotasi ikon saat kegiatan terbuka */
         .kegiatan-card.expanded .toggle-btn {
-            color: #0b51a0; 
+            transform: rotate(360deg);
+            color: #0b51a0;  
         }
 
         .kegiatan-title {
@@ -293,6 +293,7 @@
                 font-size: 0.8em; 
             }
         }
+
         footer {
             text-align: center;
             color: white;
@@ -302,13 +303,12 @@
             width: 93vw;
             position: relative;
         }
-        
     </style>
 </head>
 <body>
     <header>
         <img src="400-binfraswil.jpg" alt="Logo" class="header-logo">
-        <span class="header-title">Progres Strong Point Mitra Bidang Infraswil Tahun 2025</span></header>
+        <span class="header-title">Progres Strong Point Mitra Bidang Infraswil 2025</span></header>
 
     <div class="container" id="opd-container">
         </div>
@@ -417,7 +417,7 @@
                         keterangan: "1. Pengadaan beberapa material ARSINUM yang indent oleh penyedia 2. Persiapan penyediaan material bangunan pelindung di Makassar dan Selayar.",
                         rencana_aksi: "Persiapan pengangkutan material bangunan pelindung ARSINUM di Makassar dan Selayar.",
                         link_pdf: "https://www.google.com/search?q=laporan+pdf+swro+soppeng",
-                        status_color: "green",
+                        status_color: "blue", // Diperbaiki dari "green" ke "blue" sesuai status-blue
                     },
                 ],
             },
@@ -443,7 +443,6 @@
                     return '';
             }
         }
-
 
         // Fungsi untuk membuat HTML Card Kegiatan
         function createKegiatanCard(kegiatan, index) {
@@ -491,7 +490,7 @@
             `;
         }
 
-// Fungsi untuk membuat HTML Card OPD (DITAMBAH Tombol Toggle)
+        // Fungsi untuk membuat HTML Card OPD (DITAMBAH Tombol Toggle)
         function createOPDCard(opd) {
             const totalKegiatan = opd.kegiatan.length;
             const card = document.createElement('div');
@@ -519,24 +518,34 @@
                 kegiatanContainer.innerHTML += createKegiatanCard(keg, index);
             });
 
-            // Event listener klik untuk membuka/menutup daftar kegiatan
-            card.querySelector('.card-header').addEventListener('click', () => {
-                toggleKegiatanContainer(kegiatanContainer);
+            // Event listener klik pada card-header untuk toggle daftar kegiatan
+            card.querySelector('.card-header').addEventListener('click', (event) => {
+                // Pastikan klik tidak berasal dari elemen di dalam .card-header yang memiliki event lain
+                if (!event.target.closest('.pdf-button') && !event.target.closest('.kegiatan-card-head')) {
+                    toggleKegiatanContainer(card);
+                }
             });
 
             return card;
         }
 
-        // Fungsi Toggle untuk Container Kegiatan (Disesuaikan untuk tidak mengelola ikon OPD)
-        function toggleKegiatanContainer(container) {
-            // Tutup container lain
-            document.querySelectorAll('.kegiatan-container').forEach(cont => {
-                if (cont !== container && cont.classList.contains('show')) {
+        // Fungsi Toggle untuk Container Kegiatan (Disesuaikan untuk mengelola ikon OPD)
+        function toggleKegiatanContainer(opdCard) {
+            const container = opdCard.querySelector('.kegiatan-container');
+            const opdToggleBtn = opdCard.querySelector('.opd-toggle-btn');
+            
+            // Tutup container OPD lain
+            document.querySelectorAll('.card').forEach(card => {
+                const cont = card.querySelector('.kegiatan-container');
+                const btn = card.querySelector('.opd-toggle-btn');
+                if (card !== opdCard && card.classList.contains('expanded')) {
                     cont.classList.remove('show');
+                    card.classList.remove('expanded');
+                    if(btn) btn.textContent = 'expand_more';
                 }
             });
             
-            // Reset semua detail kegiatan dan ikonnya
+            // Reset semua detail kegiatan dan ikonnya di SEMUA card
             document.querySelectorAll('.kegiatan-detail').forEach(detail => {
                 detail.classList.remove('show');
             });
@@ -550,9 +559,17 @@
             
             // Tampilkan/sembunyikan container yang diklik
             container.classList.toggle('show');
+            opdCard.classList.toggle('expanded'); // Tambahkan/Hapus kelas expanded pada CARD OPD
+            
+            // Ganti icon OPD yang diklik
+            if (opdCard.classList.contains('expanded')) {
+                opdToggleBtn.textContent = 'expand_less';
+            } else {
+                opdToggleBtn.textContent = 'expand_more';
+            }
         }
 
-        // Fungsi Toggle untuk Detail Kegiatan (Mengelola Ikon Kegiatan)
+        // Fungsi Toggle untuk Detail Kegiatan (Tidak Berubah)
         function toggleKegiatanDetail(kegiatanCard) {
             const detail = kegiatanCard.querySelector('.kegiatan-detail');
             const toggleBtn = kegiatanCard.querySelector('.toggle-btn');
@@ -591,17 +608,8 @@
             });
         });
     </script>
-    Strong Point 2025 | &copy; Copyright by @zuwlend.  
+    <footer id="footer">
+      Strong Point 2025 | &copy; Copyright by @zuwlend.
+    </footer>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
